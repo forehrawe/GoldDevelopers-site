@@ -1,0 +1,25 @@
+from django.shortcuts import render
+from django.views.generic import TemplateView
+# Create your views here.
+# def AdminHomepage(request):
+#     return render(request, 'Admin/AdminManagements.html')
+
+class AdminHomepage(TemplateView):
+    template_name = 'Admin/AdminManagements.html'
+    
+#other way with using Methods:
+#from django.views import View
+# class AdminHomepage(View):
+#     def get(self, request):
+#         return render(request, '')
+
+
+#in view if you need database records: 
+from django.views.generic import ListView
+from .models import Posts
+
+# Create your views here.
+class Homepage(ListView):
+    model = Posts
+    template_name = 'home.html'
+    context_object_name = 'posts' # its random name and you will use this in your template with jinja

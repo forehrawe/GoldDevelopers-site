@@ -1,0 +1,76 @@
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a style="font-family: verdana; font-size: 20px" href="#">New Admin</a><hr>
+    <a style="font-family: verdana; font-size: 20px" href="#">Demote Admin</a><hr>
+    <a style="font-family: verdana; font-size: 20px" href="#">Clients List</a><hr>
+    <a style="font-family: verdana; font-size: 20px" href="#">Delete Post</a><hr>
+  </div>
+</div>
+<span style="font-size:30px;cursor:pointer; color: white;" onclick="openNav()">&#9776;</span>
+
+<style>
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.2s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: flex;
+  transition: 0.1s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .overlay a {font-size: 5px}
+  .overlay .closebtn {
+  font-size: 30px;
+  top: 15px;
+  right: 35px;
+  }
+}
+</style>
+
+<script>
+function openNav() {
+  if (window.innerWidth <= 767) {  
+    document.getElementById("myNav").style.width = "48%";  // گوشی
+  } else {
+    document.getElementById("myNav").style.width = "15%";  // دسکتاپ
+  }
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+</script>

@@ -1,0 +1,37 @@
+{% extends "Base.html" %}
+{% block title %}Homepage{% endblock title %}
+{% block head %}{% include "Navbar.html" %}{% endblock head %}
+{% block body %}
+<div class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+  {% if posts %}
+    <div class="grid md:grid-cols-2 gap-8 ">
+      {% for post in posts %}
+        <div class="relative border border-blue-500 bg-gradient-to-br from-white-100 to-gray-50 rounded-3xl shadow-lg p-6 flex flex-col hover:-translate-y-[0.7px] duration-300">
+        <h2 class="text-2xl font-bold mb-3 text-white">{{ post.Title }}</h2>
+        <p class="text-gray-400 mb-5">{{ post.Summary|default:"No summary available." }}</p>
+        <a href="post/{{ post.id }}"
+          class="absolute right-6 bottom-[0.08px] translate-y-1/2 text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-full transition-colors duration-200">
+          Read More →
+        </a>
+        </div>  
+
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-gray-500 text-lg">No posts available at the moment.</p>
+  {% endif %}
+</div>
+
+{% endblock body %}
+{% block style %}
+
+body, html {
+  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+  background-repeat: no-repeat;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+{% endblock style %}
+{% block script %}{% endblock script %}
