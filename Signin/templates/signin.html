@@ -10,11 +10,20 @@
   </div>
 
   <div class="mt-6 w-full max-w-sm">
-    <form action="#" method="POST" class="space-y-4 w-full">
+    {% if messages %}
+      <div class="mb-2">
+        {% for message in messages %}
+          <p class="text-red-500 text-sm">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form action="{% url 'signin' %}" method="POST" class="space-y-4 w-full">
+      {% csrf_token %}
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-100">Email address</label>
+        <label for="username" class="block text-sm font-medium text-gray-100">username address</label>
         <div class="mt-1">
-          <input id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-none placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm" />
+          <input id="username" type="username" name="username" required autocomplete="username" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-none placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm" />
         </div>
       </div>
 
@@ -37,15 +46,12 @@
 
     <p class="mt-4 text-center text-sm text-gray-400">
       Not a member?
-      <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">SignUp Now!</a>
+      <a href="{% url 'signup' %}" class="font-semibold text-indigo-400 hover:text-indigo-300">SignUp Now!</a>
     </p>
   </div>
 </div>
-
-
-
-
 {% endblock body %}
+
 {% block style %}
 body, html {
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);

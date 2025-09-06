@@ -41,9 +41,9 @@
           </button>
           <!-- Dropdown menu -->
           <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-20">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your profile</a>
+            <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your profile</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Sign out</a>
+            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Sign out</a>
           </div>
         </div>
       </div>
@@ -54,10 +54,10 @@
   <!-- Mobile menu -->
   <div class="sm:hidden hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href="#" class="block text-white bg-gray-950/50 px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Team</a>
+      <a href="/" class="block text-white bg-gray-950/50 px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Ticket</a>
       <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Projects</a>
-      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">About</a>
     </div>
   </div>
 </nav>

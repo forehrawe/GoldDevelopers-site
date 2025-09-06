@@ -5,7 +5,9 @@ class PostsModel(models.Model):
     Author = models.CharField(max_length=30)
     Title = models.CharField(max_length=40)
     Summary = models.TextField(default='')
+    Date = models.DateField(auto_now_add=True)
     Content = models.TextField()
+    JustDate = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.Title

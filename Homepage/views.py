@@ -6,3 +6,4 @@ class Homepage(ListView):
     model = PostsModel
     template_name = 'home.html'
     context_object_name = 'posts'
+    ordering = ['-JustDate']
