@@ -1,4 +1,6 @@
 {% extends "Base.html" %}
+{% load static %}
+
 {% block title %}Homepage{% endblock title %}
 {% block head %}{% include "Navbar.html" %}{% endblock head %}
 {% block body %}
@@ -9,7 +11,7 @@
       {% for post in posts %}
         <div class="relative border border-blue-500 bg-gradient-to-br from-white-100 to-gray-50 rounded-3xl shadow-lg p-6 flex flex-col hover:-translate-y-[0.7px] duration-300">
         <h2 class="text-2xl font-bold mb-3 text-white">{{ post.Title }}</h2>
-        <p class="text-gray-400 mb-5">{{ post.Summary|default:"No summary available." }}</p>
+        <p class="text-gray-400 mb-5 font-">{{ post.Summary|default:"No summary available." }}</p>
         <a href="post/{{ post.id }}"
           class="absolute right-6 bottom-[0.08px] translate-y-1/2 text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-full transition-colors duration-200">
           Read More →
@@ -31,6 +33,14 @@ body, html {
   background-repeat: no-repeat;
   overflow-y: hidden;
   height: 100%;
+}
+
+@font-face {
+    font-family: 'Vazirmatn-thin';
+    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 {% endblock style %}

@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 
 class AdminHomepage(TemplateView):
     template_name = 'Admin/AdminManagements.html'
-    
+
 #other way with using Methods:
 #from django.views import View
 # class AdminHomepage(View):

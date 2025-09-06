@@ -1,8 +1,8 @@
 from django.views.generic import ListView
-from .models import Posts
+from .models import PostsModel
 
 # Create your views here.
 class Homepage(ListView):
-    model = Posts
+    model = PostsModel
     template_name = 'home.html'
     context_object_name = 'posts'

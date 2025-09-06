@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import Posts
+from Homepage.models import PostsModel
 
 # Create your views here.
 class Posts(View):
     def get(self, request, id):
-        
-        return render(request, 'Posts.html')
+        obj = get_object_or_404(PostsModel, id=id)
+        return render(request, 'Posts.html', {'obj':obj})

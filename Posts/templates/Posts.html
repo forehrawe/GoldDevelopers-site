@@ -1,7 +1,20 @@
 {% extends "Base.html" %}
+{% load static %}
+
 {% block head %}{% include "Navbar.html" %}{% endblock head %}
 {% block title %}Posts{% endblock title %}
 {% block body %}
+<div class="card">
+  <header>Post #{{ obj.id }}</header>
+
+
+  <p class="title">موضوع: {{ obj.Title }}</p>
+
+  
+  <p class="content">{{ obj.Content }}</p>
+
+
+</div>
 
 {% endblock body %}
 
@@ -12,5 +25,132 @@ body, html {
   overflow-y: hidden;
   height: 100%;
 }
+
+/* فونت فارسی */
+@font-face {
+    font-family: 'Vazirmatn-thin';
+    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* کارت */
+.card {
+  width: 40%;
+  height: 86.5%;
+  font-family: verdana;
+  background-color: #38383869;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin: 7px 10px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.516);
+  border: 1px solid rgb(0, 102, 255);
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 50px;
+  overflow-y: auto;
+  text-align: right; /* اضافه شد */
+}
+
+.card .title {
+  font-family: 'Vazirmatn-thin', Tahoma, Arial, sans-serif;
+  color: white;
+  margin: 10px 0 15px 0;
+  font-size: 20px;
+  display: inline-block;
+  border-bottom: 1.5px solid rgb(0, 102, 255);
+  padding-bottom: 2px;
+  unicode-bidi: embed;
+  direction: rtl;
+  /* خط وسط کارت نیوفته */
+  margin-left: 0; 
+}
+
+
+
+/* شخصی‌سازی اسکرول کارت */
+.card::-webkit-scrollbar {
+  width: 6px; /* ضخامت اسکرول */
+  border-radius: 5px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: rgb(59, 85, 122); /* رنگ آبی */
+  border-radius: 10px; /* گرد بودن گوشه‌ها */
+}
+
+.card::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1); /* رنگ زمینه track */
+  border-radius: 4px;
+}
+
+
+/* متن محتوا */
+.card .content {
+  font-family: 'Vazirmatn-thin', Tahoma, Arial, sans-serif;
+  unicode-bidi: embed;  
+  direction: auto; /* متن فارسی راست، انگلیسی چپ */
+  text-align: start;
+  color: white;
+  margin: 10px 0;
+  margin-top: 50px;
+  white-space: pre-wrap; /* این خط */
+  word-break: break-word;
+  direction: rtl;      
+  text-align: right;   
+}
+
+/* هدر کارت */
+header {
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    width: 20%;
+    font-family: arial;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: linear-gradient(270deg, #ff0000, #00ffea, #ff00c8, #00ff00, #ff0000);
+    background-size: 1000% 1000%;
+    animation: gradientShift 30s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 767px) {
+  .card {
+    width: 94%;
+    margin: 15px auto;
+    padding: 12px;
+  }
+  .card .title, .card .content {
+    font-size: 1rem;
+    margin-top: 40px
+  }
+
+  header {
+    font-size: 17px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 35%;
+    padding: 5px;
+  }
+}
+
+
+
+
 {% endblock style %}
 {% block script %}{% endblock script %}

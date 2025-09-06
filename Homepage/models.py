@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Posts(models.Model):
+class PostsModel(models.Model):
     Author = models.CharField(max_length=30)
     Title = models.CharField(max_length=40)
     Summary = models.TextField(default='')
