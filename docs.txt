@@ -37,3 +37,20 @@ class Posts(View):
     def get(self, request, id):
         obj = get_object_or_404(PostsModel, id=id)
         return render(request, 'Posts.html', {'obj':obj})
+
+
+
+
+#for make custom creation form
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django import forms
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
