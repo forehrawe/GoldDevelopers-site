@@ -23,3 +23,17 @@ class Homepage(ListView):
     model = Posts
     template_name = 'home.html'
     context_object_name = 'posts' # its random name and you will use this in your template with jinja
+
+
+
+
+
+
+#find database record by id: 
+from Homepage.models import PostsModel
+
+# Create your views here.
+class Posts(View):
+    def get(self, request, id):
+        obj = get_object_or_404(PostsModel, id=id)
+        return render(request, 'Posts.html', {'obj':obj})
