@@ -28,6 +28,7 @@ body, html {
   background-repeat: no-repeat;
   overflow-y: hidden;
   height: 100%;
+  
 }
 
 /* فونت فارسی */
@@ -41,13 +42,12 @@ body, html {
 
 /* کارت */
 .card {
-  width: 40%;
+  width: 60%;
   height: 86.5%;
   font-family: verdana;
   background-color: #38383869;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  margin: 7px 10px 10px 10px;
   border-radius: 10px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.516);
   border: 1px solid rgb(0, 102, 255);
@@ -58,6 +58,10 @@ body, html {
   overflow-y: auto;
   text-align: right; /* اضافه شد */
   color: #fff;
+  margin: 20px auto;
+  user-select: none;  /* انتخاب متن غیر فعال */
+  -webkit-user-drag: none;
+  font-size: 18px
 }
 
 .card .title {

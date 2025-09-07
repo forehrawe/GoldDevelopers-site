@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="bg-gray-800/50 relative border-b-[1px] border-b-[rgb(0,102,255)]">
+<nav class="bg-gray-800/50 relative border-b-[1px] border-b-[rgb(0,102,255)] select-none">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
 
@@ -22,13 +22,13 @@
       <!-- Logo & Desktop menu -->
       <div class="flex-1 flex items-center justify-center sm:justify-start">
         <div class="flex-shrink-0">
-          <img class="h-12 w-auto" src="{% static 'image/LogoIMG.png' %}" alt="Logo">
+          <img id="SiteLogo" class="h-12 w-auto" src="{% static 'image/LogoIMG.png' %}" alt="Logo">
         </div>
         <div class="hidden sm:flex sm:ml-6 space-x-4">
-          <a href="/" class="text-white bg-gray-950/50 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-          <a href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Ticket</a>
-          <a href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-          <a href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">About</a>
+          <a id="LinksTop" href="/" class="text-white bg-gray-950/50 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <a id="LinksTop" href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Ticket</a>
+          <a id="LinksTop" href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+          <a id="LinksTop" href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">About</a>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
         <div class="relative">
           <button id="profile-button" class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="sr-only">Open user menu</span>
-            <img class="h-9 w-9 rounded-full" src="{% static 'image/Avatar.png' %}" alt="User">
+            <img id="AvatarLogo" class="h-9 w-9 rounded-full" src="{% static 'image/Avatar.png' %}" alt="User">
           </button>
           <!-- Dropdown menu -->
           <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-20">
@@ -90,4 +90,11 @@
       profileMenu.classList.add('hidden');
     }
   });
+
+
+  document.querySelectorAll('#SiteLogo, #AvatarLogo, #LinksTop').forEach(link => {
+        link.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
+    });
 </script>

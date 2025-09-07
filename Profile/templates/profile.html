@@ -7,6 +7,10 @@
 {% block body %}
 <div class="profile-container">
     <div class="profile-card">
+      <a href="#" class="setting-link">
+        <img class="setting-icon" src="{% static 'image/setting.png' %}" alt="">
+      </a>
+
         <div class="profile-header">
             <img src="{% static 'image/Avatar.png' %}" alt="Avatar" class="avatar"/>
             <h2 class="username">Username : {{ user.username }}</h2>
@@ -30,9 +34,13 @@
 {% endblock body %}
 
 {% block style %}
-
-
-
+body, html {
+  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+  overflow-y: hidden;
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
 
 
@@ -154,28 +162,22 @@
 
 
 
-body, html {
-  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-  overflow-y: hidden;
-  height: 100%;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-/* کانتینر اصلی */
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
+  user-select: none;  /* انتخاب متن غیر فعال */
+  -webkit-user-drag: none;
 }
 
-/* کارت پروفایل */
+
+
 .profile-card {
   width: 100%;
   max-width: 800px;
-  background: rgba(31, 41, 55, 0.7); /* مثل bg-gray-800/70 */
+  background: rgba(31, 41, 55, 0.7);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
@@ -183,7 +185,8 @@ body, html {
   color: #fff;
 }
 
-/* بخش بالای پروفایل */
+
+
 .profile-header {
   display: flex;
   flex-direction: column;
@@ -264,4 +267,42 @@ body, html {
     font-size: 20px;
   }
 }
+
+
+
+
+.setting-icon {
+  animation: setting-yoyo 4s infinite ease-in-out;
+  width: 40px;
+}
+
+@keyframes setting-yoyo {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-140deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(-360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+
+
+
+a.setting-link {
+  display: inline-flex; /* فقط اندازه محتوا */
+  width: auto;          /* از قبل */
+  padding: 0;           /* بدون فاصله اضافی */
+}
+
+
+
+
+
 {% endblock style %}
+{% block script %}
+document.querySelectorAll('.profile-container').forEach(link => {
+        link.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
+    });
+{% endblock script %}
