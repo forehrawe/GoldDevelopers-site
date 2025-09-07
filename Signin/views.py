@@ -15,5 +15,5 @@ class Signin(View):
             login(request, user)
             return redirect("/")
         else:
-            messages.error(request, "Invalid credentials")
+            messages.error(request, "Invalid Username Or Password")
             return render(request, "signin.html")

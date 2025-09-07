@@ -21,7 +21,7 @@
     <form action="{% url 'signin' %}" method="POST" class="space-y-4 w-full">
       {% csrf_token %}
       <div>
-        <label for="username" class="block text-sm font-medium text-gray-100">username address</label>
+        <label for="username" class="block text-sm font-medium text-gray-100">username</label>
         <div class="mt-1">
           <input id="username" type="username" name="username" required autocomplete="username" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-none placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm" />
         </div>
