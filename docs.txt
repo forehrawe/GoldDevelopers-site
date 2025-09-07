@@ -59,3 +59,22 @@ class CustomUserCreationForm(UserCreationForm):
 
 #object count
 posts_count = PostsModel.objects.filter(Author=user).count()
+
+
+
+
+
+
+#sessions: 
+def set_session(request):
+    request.session['favorite_color'] = 'blue'
+    return HttpResponse("سشن ذخیره شد!")
+
+#getting session
+    request.get.session('')
+
+#del session
+    del request.session[""]
+
+#delete all sessions
+    request.session.flush()
