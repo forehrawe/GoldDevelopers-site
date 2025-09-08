@@ -5,27 +5,46 @@
 {% block head %}{% include "Navbar.html" %}{% endblock head %}
 {% block body %}
 <div class="card">
-    
+    <textarea name="content-textarea"></textarea>
+    <div class="relative inline-block text-left">
+
 </div>
 {% endblock body %}
 {% block style %}
-body, html {
-  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-  background-repeat: no-repeat;
-  overflow-y: hidden;
-  height: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+    overflow: hidden;
+    position: relative;
 }
 
 .card {
     width: 60%;
     height: 70%;
-    justify-content: center;
-    justify-items: center;
     border-radius: 30px;
     background-color: rgba(77, 77, 77, 0.214);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(67, 67, 255);
+}
+@media (max-width: 768px) {
+    .card {
+        width: 90%;   /* تقریبا کل صفحه */
+        border-radius: 20px;
+    }
 }
 {% endblock style %}
-{% block script %}{% endblock script %}
+{% block script %}
+ const button = document.getElementById("menu-button");
+  const dropdown = document.getElementById("dropdown");
+
+  button.addEventListener("click", () => {
+    dropdown.classList.toggle("hidden");
+  });
+{% endblock script %}
