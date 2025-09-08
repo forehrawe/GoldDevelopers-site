@@ -1,0 +1,31 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block title %}Ticket{% endblock title %}
+{% block head %}{% include "Navbar.html" %}{% endblock head %}
+{% block body %}
+<div class="card">
+    
+</div>
+{% endblock body %}
+{% block style %}
+body, html {
+  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+  background-repeat: no-repeat;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+.card {
+    width: 60%;
+    height: 70%;
+    justify-content: center;
+    justify-items: center;
+    border-radius: 30px;
+    background-color: rgba(77, 77, 77, 0.214);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+}
+{% endblock style %}
+{% block script %}{% endblock script %}
