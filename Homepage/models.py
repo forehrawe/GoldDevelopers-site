@@ -11,3 +11,15 @@ class PostsModel(models.Model):
     
     def __str__(self):
         return self.Title
+    
+class Documentations(models.Model):
+    JustDate = models.DateTimeField(auto_now_add=True)
+    Date = models.DateField(auto_now_add=True)
+    Title = models.CharField(max_length=30)
+    Content_p1 = models.CharField(max_length=700)
+    Content_p2 = models.CharField(max_length=700)
+    Content_p3 = models.CharField(max_length=700)
+    Content_p4 = models.CharField(max_length=700)
+    
+    def __str__(self):
+        return self.Title

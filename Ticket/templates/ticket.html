@@ -2,49 +2,180 @@
 {% load static %}
 
 {% block title %}Ticket{% endblock title %}
-{% block head %}{% include "Navbar.html" %}{% endblock head %}
+{% block head %}
+{% include "Navbar.html" %}
+
+{% if message %}
+<div id='AlertBox' class='AlertBox'>{{ message }}</div>
+{% endif %}
+
+{% endblock head %}
+
 {% block body %}
 <div class="card">
-    <textarea name="content-textarea"></textarea>
-    <div class="relative inline-block text-left">
+  <h2 class="title">ارسال تیکت</h2>
 
+  <form method="POST">
+    {% csrf_token %}
+    <textarea dir='rtl' class="textarea" name="message" placeholder="متن خود را اینجا وارد کنید..."></textarea>
+    <div class="relative inline-block text-left menu">
+      <select name="category" class="dropdown-select">
+        <option value="bug">گزارش باگ</option>
+        <option value="suggestion">پیشنهادات</option>
+        <option value="criticism">انتقادات</option>
+      </select>
+    </div>
+
+
+    <button type="submit" class="send-btn">ارسال</button>
+  </form>
 </div>
 {% endblock body %}
+
 {% block style %}
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-    overflow: hidden;
-    position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+  overflow: hidden;
+  font-family: "Vazirmatn", sans-serif;
 }
 
 .card {
-    width: 60%;
-    height: 70%;
-    border-radius: 30px;
-    background-color: rgba(77, 77, 77, 0.214);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: absolute;
-    top: 50%;
+  width: 800px;
+  height: 500px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(67, 67, 255, 0.6);
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(30, 30, 30, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.textarea {
+  flex: 1; /* تمام فضای باقی‌مانده کارت رو پر می‌کنه */
+  resize: none;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 340px;
+}
+
+.send-btn {
+  background: rgba(67, 67, 255, 0.7);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 12px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 80%;
+}
+
+.send-btn:hover {
+    background: rgba(67, 67, 255, 1);
+}
+
+.AlertBox {
+    position: fixed;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid rgb(67, 67, 255);
+    width: 30%;
+    min-height: 100px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #d4d4d4 0%, rgb(182, 182, 182) 100%);
+    z-index: 1000;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
-@media (max-width: 768px) {
-    .card {
-        width: 90%;   /* تقریبا کل صفحه */
-        border-radius: 20px;
+@media (max-width: 1024px) {
+  .card {
+      width: 90%;
+      min-height: 450px;
+      padding: 15px;
+      margin-top: 30px;
     }
 }
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 1.2rem;
+  }
+  .textarea {
+    min-height: 150px;
+    font-size: 0.9rem;
+  }
+  .dropdown-select {
+    font-size: 0.9rem;
+  }
+  .send-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 69.5%;
+  }
+  .AlertBox {
+    width: 80%;          /* عرض بیشتر روی گوشی */
+    top: 3%;            /* پایین‌تر بیاد */
+    left: 50%;
+    transform: translate(-50%, 0); /* فقط وسط افقی باشه، عمودی نه */
+    font-size: 0.9rem;   /* متن کوچیک‌تر */
+    padding: 15px;
+    min-height: 80px;
+
+} }
+
+@font-face {
+    font-family: 'Vazirmatn-thin';
+    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 {% endblock style %}
 {% block script %}
- const button = document.getElementById("menu-button");
-  const dropdown = document.getElementById("dropdown");
 
-  button.addEventListener("click", () => {
-    dropdown.classList.toggle("hidden");
-  });
+function closeBox() {
+  document.getElementById('AlertBox').style.display = 'none';
+}
+
+setTimeout(closeBox, 3000)
+
 {% endblock script %}
