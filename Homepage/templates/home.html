@@ -3,63 +3,54 @@
 
 {% block title %}Homepage{% endblock title %}
 {% block head %}{% include "Navbar.html" %}{% endblock head %}
-
 {% block body %}
-<div class="flex flex-col lg:flex-row h-screen">
+<div class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
-  <!-- Sidebar -->
-  <!-- Sidebar -->
-<aside class="hidden lg:block w-1/4 bg-gray-800/50 rounded-xl p-6 text-white h-64 lg:h-full mb-6 lg:mb-0">
+  {% if posts %}
+    <div id="PostDiv" class="grid md:grid-cols-2 gap-8 ">
+      {% for post in posts %}
+        <div class="relative border border-blue-500 bg-gradient-to-br from-white-100 to-gray-50 rounded-3xl shadow-lg p-6 flex flex-col hover:-translate-y-[0.7px] duration-300">
+        <h2 class="text-2xl font-bold mb-3 text-white">{{ post.Title }}</h2>
+        <p class="text-gray-400 mb-5 font-">{{ post.Summary|default:"No summary available." }}</p>
+        <a href="post/{{ post.id }}"
+          class="absolute right-6 bottom-[0.08px] translate-y-1/2 text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-full transition-colors duration-200">
+          Read More →
+        </a>
+        </div>  
 
-    <h2 class="font-bold text-xl mb-4">Documents</h2>
-    <ul>
-      <li class="mb-2"><a href="#" class="hover:underline">Django Documentations</a></li>
-      <li class="mb-2"><a href="#" class="hover:underline">Flask Documentations</a></li>
-      <li class="mb-2"><a href="#" class="hover:underline">OpenCV Documentations</a></li>
-      <li class="mb-2"><a href="#" class="hover:underline">Telebot Documentations</a></li>
-    </ul>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="w-full lg:w-3/4 p-4 overflow-y-auto pb-32">
-    {% if posts %}
-      <div id="PostDiv" class="grid md:grid-cols-2 gap-8">
-        {% for post in posts %}
-          <div class="relative border border-blue-500 bg-gradient-to-br from-white-100 to-gray-50 rounded-3xl shadow-lg p-6 flex flex-col hover:-translate-y-[0.7px] duration-300">
-            <h2 class="text-2xl font-bold mb-3 text-white">{{ post.Title }}</h2>
-            <p class="text-gray-400 mb-5">{{ post.Summary|default:"No summary available." }}</p>
-            <a href="post/{{ post.id }}"
-              class="absolute right-6 bottom-[0.08px] translate-y-1/2 text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-full transition-colors duration-200">
-              Read More →
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="text-center text-gray-500 text-lg">No posts available at the moment.</p>
-    {% endif %}
-  </main>
-
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-gray-500 text-lg">No posts available at the moment.</p>
+  {% endif %}
 </div>
-{% endblock body %}
 
+{% endblock body %}
 {% block style %}
+
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: "Vazirmatn", sans-serif;
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-  overflow: hidden;
-  user-select: none;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+  height: 100%;
+  user-select: none;  /* انتخاب متن غیر فعال */
   -webkit-user-drag: none;
 }
 
-{% endblock style %}
+@font-face {
+    font-family: 'Vazirmatn-thin';
+    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
+{% endblock style %}
 {% block script %}
 document.querySelectorAll('#PostDiv').forEach(link => {
-    link.addEventListener('dragstart', (event) => {
-        event.preventDefault();
+        link.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
     });
-});
+
 {% endblock script %}
