@@ -33,13 +33,21 @@
 {% endblock body %}
 
 {% block style %}
+@font-face {
+    font-family: 'Vazirmatn-thin';
+    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
   overflow: hidden;
-  font-family: "Vazirmatn", sans-serif;
+  font-family: "Vazirmatn-thin", sans-serif;
 }
 
 .card {
@@ -49,7 +57,7 @@ html, body {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(67, 67, 255, 0.6);
@@ -74,6 +82,7 @@ html, body {
   color: #fff;
   font-size: 1rem;
   margin-right: 20px;
+  font-family: 'Vazirmatn-thin'
 }
 
 .textarea {
@@ -159,13 +168,6 @@ html, body {
 
 } }
 
-@font-face {
-    font-family: 'Vazirmatn-thin';
-    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
-         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 
 
 
