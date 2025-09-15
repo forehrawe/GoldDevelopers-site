@@ -7,21 +7,20 @@
 {% block body %}
 <div class="profile-container">
     <div class="profile-card">
-      <a href="#" class="setting-link">
+      <div class="setting"></div>
         <img class="setting-icon" src="{% static 'image/setting.png' %}" alt="">
       </a>
 
         <div class="profile-header">
-            <img src="{% static 'image/Avatar.png' %}" alt="Avatar" class="avatar"/>
-            <h2 class="username">Username : {{ user.username }}</h2>
-            <p class="email">Email : {{ user.email }}</p>
-            <p class="joined">Joined : {{ user.date_joined|date:"F j, Y" }}</p>
+            <h4 class="username">Username : </h4><input value="{{ user.username }}" type='text' class="username_input">
+            <h4 class="email">Email : </h4> <input value="{{ user.email }}" type='text' class="email_input">
+            <h6>Email Verification : </h6><i class="{{ profile.verified_status }}"></i>
+            {% if profile.verified_status == 'bi bi-x-circle' %} <a href="#" style="background-color: green; text-align: center; width: 90px; border-radius: 10px">Verify Now!</a> {% endif %}
         </div>
 
         <div class="actions">
-            <h3>Your Actions</h3>
             <div class="container">
-                <div class="btn"><a href="profile-edit">Edit Profile</a></div>
+                <div class="btn"><a href="#">Edit Profile</a></div>
                 <div class="btn"><a href="{% url 'logout' %}">Log Out</a></div>
             </div>
 
@@ -36,7 +35,7 @@
 {% block style %}
 body, html {
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-  overflow-y: hidden;
+  overflow-y: auto;
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
@@ -183,15 +182,11 @@ body, html {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   padding: 25px;
   color: #fff;
+  height: 500px
 }
 
 
 
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .avatar {
   height: 100px;
@@ -201,16 +196,7 @@ body, html {
   object-fit: cover;
 }
 
-.username {
-  margin-top: 15px;
-  font-size: 24px;
-  font-weight: bold;
-}
 
-.email {
-  color: #d1d5db;
-  margin-top: 5px;
-}
 
 .joined {
   color: #9ca3af;
@@ -276,6 +262,10 @@ body, html {
   width: 40px;
 }
 
+
+
+
+
 @keyframes setting-yoyo {
   0% { transform: rotate(0deg); }
   25% { transform: rotate(-140deg); }
@@ -288,7 +278,7 @@ body, html {
 
 
 
-a.setting-link {
+a.setting {
   display: inline-flex; /* فقط اندازه محتوا */
   width: auto;          /* از قبل */
   padding: 0;           /* بدون فاصله اضافی */
@@ -296,7 +286,47 @@ a.setting-link {
 
 
 
+.username_input {
+  width: 200px;
+  background: none;
+  border-radius: 10px;
+  padding: 4px;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 50px;
+  border: 1px solid white;
+}
+.email_input {
+  width: 200px;
+  background: none;
+  border-radius: 10px;
+  padding: 4px;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 50px;
+  border: 1px solid white;
+}
 
+
+.profile-header {
+  display: grid;
+  grid-template-columns: repeat(2,160px);
+  align-items: left;
+  margin: 20px;
+  row-gap: 20px;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.email {
+  color: #d1d5db;
+  font-size: 24px;
+  font-weight: bold;
+  height: 30px;
+}
 
 {% endblock style %}
 {% block script %}
