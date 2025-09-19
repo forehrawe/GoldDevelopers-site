@@ -17,7 +17,7 @@
 
   <form method="POST">
     {% csrf_token %}
-    <textarea dir='rtl' class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..."></textarea>
+    <textarea dir='rtl' class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..." required></textarea>
     <div class="relative inline-block text-left menu">
       <select name="category" class="dropdown-select">
         <option value="bug">گزارش باگ</option>
@@ -47,7 +47,6 @@ html, body {
   padding: 0;
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
   overflow: hidden;
-  font-family: "Vazirmatn-thin", sans-serif;
 }
 
 .card {
@@ -131,11 +130,13 @@ html, body {
     justify-content: center;
     text-align: center;
     padding: 20px;
+    font-family: 'Vazirmatn-thin';
 }
+
 @media (max-width: 1024px) {
   .card {
       width: 90%;
-      min-height: 450px;
+      min-height: 430px;
       padding: 15px;
       margin-top: 30px;
     }

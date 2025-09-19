@@ -8,21 +8,21 @@ class AdminHomepage(TemplateView):
     template_name = 'Admin/AdminManagements.html'
 
 #other way with using Methods:
-#from django.views import View
-# class AdminHomepage(View):
-#     def get(self, request):
-#         return render(request, '')
+    #from django.views import View
+    # class AdminHomepage(View):
+    #     def get(self, request):
+    #         return render(request, '')
 
 
 #in view if you need database records: 
-from django.views.generic import ListView
-from .models import Posts
+    from django.views.generic import ListView
+    from .models import Posts
 
-# Create your views here.
-class Homepage(ListView):
-    model = Posts
-    template_name = 'home.html'
-    context_object_name = 'posts' # its random name and you will use this in your template with jinja
+    # Create your views here.
+    class Homepage(ListView):
+        model = Posts
+        template_name = 'home.html'
+        context_object_name = 'posts' # its random name and you will use this in your template with jinja
 
 
 
@@ -30,35 +30,35 @@ class Homepage(ListView):
 
 
 #find database record by id: 
-from Homepage.models import PostsModel
+    from Homepage.models import PostsModel
 
-# Create your views here.
-class Posts(View):
-    def get(self, request, id):
-        obj = get_object_or_404(PostsModel, id=id)
-        return render(request, 'Posts.html', {'obj':obj})
+    # Create your views here.
+    class Posts(View):
+        def get(self, request, id):
+            obj = get_object_or_404(PostsModel, id=id)
+            return render(request, 'Posts.html', {'obj':obj})
 
 
 
 
 #for make custom creation form
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django import forms
+    from django.contrib.auth.forms import UserCreationForm
+    from django.contrib.auth.models import User
+    from django import forms
 
-class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
+    class CustomUserCreationForm(UserCreationForm):
+        email = forms.EmailField(required=True)
+        first_name = forms.CharField(required=True)
+        last_name = forms.CharField(required=True)
 
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        class Meta:
+            model = User
+            fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
 
 
 #object count
-posts_count = PostsModel.objects.filter(Author=user).count()
+    posts_count = PostsModel.objects.filter(Author=user).count()
 
 
 
@@ -66,15 +66,34 @@ posts_count = PostsModel.objects.filter(Author=user).count()
 
 
 #sessions: 
-def set_session(request):
-    request.session['favorite_color'] = 'blue'
-    return HttpResponse("سشن ذخیره شد!")
+    def set_session(request):
+        request.session['favorite_color'] = 'blue'
+        return HttpResponse("سشن ذخیره شد!")
 
-#getting session
-    request.get.session('')
+    #getting session
+        request.get.session('')
 
-#del session
-    del request.session[""]
+    #del session
+        del request.session[""]
 
-#delete all sessions
-    request.session.flush()
+    #delete all sessions
+        request.session.flush()
+
+
+
+
+
+
+
+#Use Email:
+    from django.core.mail import send_mail
+
+    def my_view(request):
+        send_mail(
+            subject='سلام از سایت ما 👋',
+            message='این یه ایمیل تستیه که از طریق هاست فرستاده شد.',
+            from_email=None,  # اگه None باشه از DEFAULT_FROM_EMAIL استفاده می‌کنه
+            recipient_list=['user@example.com'],
+            fail_silently=False,
+        )
+        return HttpResponse("ایمیل ارسال شد ✅")

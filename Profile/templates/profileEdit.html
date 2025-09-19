@@ -5,29 +5,35 @@
 {% block title %}Profile{% endblock title %}
 
 {% block body %}
-<div class="profile-container">
+<form method="POST">
+{% csrf_token %}
+
+  <div class="profile-container">
     <div class="profile-card">
       <div class="setting"></div>
         <img class="setting-icon" src="{% static 'image/setting.png' %}" alt="">
       </a>
 
         <div class="profile-header">
-            <h4 class="username">Username : </h4><input value="{{ user.username }}" type='text' class="username_input">
-            <h4 class="email">Email : </h4> <input value="{{ user.email }}" type='text' class="email_input">
+            <h4 class="username">Username : </h4><input name="username" value="{{ user.username }}" type='text' class="username_input" id="username" required />
+            <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" required />
             <h6>Email Verification : </h6><i class="{{ profile.verified_status }}"></i>
             {% if profile.verified_status == 'bi bi-x-circle' %} <a href="#" style="background-color: green; text-align: center; width: 90px; border-radius: 10px">Verify Now!</a> {% endif %}
         </div>
 
-        <div class="actions">
-            <div class="container">
-                <div class="btn"><a href="#">Edit Profile</a></div>
-                <div class="btn"><a href="{% url 'logout' %}">Log Out</a></div>
-            </div>
+        
+          
+          <div class="actions">
+              <div class="container">
+                  <div class="btn"><button type="button" onclick="change(event)">Save Changes</button></div>
+              </div>
 
-        </div>
-    </div>
-</div>
-
+          </div>
+        
+      
+      </div>
+  </div>
+</form>
 
 
 {% endblock body %}
@@ -35,7 +41,7 @@
 {% block style %}
 body, html {
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
-  overflow-y: auto;
+  overflow-y: hidden;
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
@@ -59,8 +65,9 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px
 }
-.container .btn a {
+.container .btn button {
   position: absolute;
   top: 0;
   left: 0;
@@ -85,10 +92,10 @@ body, html {
   transition: 0.5s;
   backdrop-filter: blur(15px);
 }
-.container .btn:hover a {
+.container .btn:hover button {
   letter-spacing: 3px;
 }
-.container .btn a::before {
+.container .btn button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -101,7 +108,7 @@ body, html {
   filter: blur(0px);
 }
 
-.container .btn:hover a::before {
+.container .btn:hover button::before {
   transform: skewX(45deg) translate(200px);
 }
 .container .btn::before {
@@ -248,6 +255,8 @@ body, html {
 @media (max-width: 600px) {
   .profile-card {
     padding: 18px;
+    height: 80%;
+    top: 20px
   }
   .username {
     font-size: 20px;
@@ -335,4 +344,68 @@ document.querySelectorAll('.profile-container').forEach(link => {
             event.preventDefault();
         });
     });
+
+
+
+function change(event) {
+  event.preventDefault()
+  var username = document.getElementById('username').value;
+  var email = document.getElementById('email').value;
+  var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  if (username.trim() == '' || email.trim() === '') {
+    Swal.fire({
+        title: "ناموفق",
+        text: 'یوزرنیم یا ایمیل معتبر نیست',
+        icon: "error"
+      });
+      return;
+  }
+
+  if (username.length < 6 || username.length > 20) {
+    Swal.fire({
+      title: "ناموفق",
+      text: "یوزرنیم باید بین 6 تا 20 کاراکتر باشد",
+      icon: "error"
+    })
+    return;
+  }
+
+  if (email.length < 15 || email.length > 40) {
+    Swal.fire({
+      title: "ناموفق",
+      text: "ایمیل باید بین 15 تا 40 کاراکتر باشد",
+      icon: "error"
+    })
+    return;
+  }
+
+
+
+
+  fetch('/profile/profile-edit/', {
+    method: 'POST',
+    headers: {"Content-Type":"application/x-www-form-urlencoded", "X-CSRFToken":csrftoken},
+    body: "username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
+  })
+  .then(response => response.text())
+  .then(data => {
+    Swal.fire({
+        title: "موفق",
+        text: data.message,
+        icon: "success"
+      });
+    })
+  .catch(err => {
+    Swal.fire({
+      title: "Error",
+      text: "Error occurred",
+      icon: 'error'
+    })
+  })
+    
+  
+}
+
+
 {% endblock script %}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>its 404</h1>
 </body>
+<style>
+    body, html {
+        background-image: url("{{ static 'image/images_2.png' }}");
+    }
+</style>
 </html>
