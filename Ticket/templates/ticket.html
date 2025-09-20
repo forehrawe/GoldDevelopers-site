@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block title %}Ticket{% endblock title %}
+
 {% block head %}
 {% include "Navbar.html" %}
 
 {% if message %}
-<div id='AlertBox' class='AlertBox'>{{ message }}</div>
+<div id="AlertBox" class="AlertBox">{{ message }}</div>
 {% endif %}
-
 {% endblock head %}
 
 {% block body %}
@@ -17,28 +17,28 @@
 
   <form method="POST">
     {% csrf_token %}
-    <textarea dir='rtl' class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..." required></textarea>
-    <div class="relative inline-block text-left menu">
+    <textarea dir="rtl" class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..." required></textarea>
+
+    <div class="form-actions">
       <select name="category" class="dropdown-select">
         <option value="bug">گزارش باگ</option>
         <option value="suggestion">پیشنهادات</option>
         <option value="criticism">انتقادات</option>
       </select>
+
+      <button type="submit" class="send-btn">ارسال</button>
     </div>
-
-
-    <button type="submit" class="send-btn">ارسال</button>
   </form>
 </div>
 {% endblock body %}
 
 {% block style %}
 @font-face {
-    font-family: 'Vazirmatn-thin';
-    src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
-         url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Vazirmatn-thin';
+  src: url("{% static 'fonts/Vazirmatn-thin.woff2' %}") format('woff2'),
+       url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html, body {
@@ -65,27 +65,17 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
 .title {
   font-size: 1.4rem;
   font-weight: bold;
   color: #fff;
   text-align: center;
-}
-
-.dropdown-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(30, 30, 30, 0.9);
-  color: #fff;
-  font-size: 1rem;
-  margin-right: 20px;
-  font-family: 'Vazirmatn-thin'
+  margin-bottom: 20px;
 }
 
 .textarea {
-  flex: 1; /* تمام فضای باقی‌مانده کارت رو پر می‌کنه */
+  flex: 1;
   resize: none;
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -94,8 +84,26 @@ html, body {
   font-size: 1rem;
   color: #fff;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   height: 340px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.dropdown-select {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(30, 30, 30, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Vazirmatn-thin';
 }
 
 .send-btn {
@@ -107,39 +115,40 @@ html, body {
   padding: 12px 25px;
   cursor: pointer;
   transition: 0.3s;
-  width: 80%;
+  white-space: nowrap;
 }
 
 .send-btn:hover {
-    background: rgba(67, 67, 255, 1);
+  background: rgba(67, 67, 255, 1);
+  transform: scale(1.05);
 }
 
 .AlertBox {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    min-height: 100px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #d4d4d4 0%, rgb(182, 182, 182) 100%);
-    z-index: 1000;
-    color: rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    font-family: 'Vazirmatn-thin';
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  min-height: 100px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #d4d4d4 0%, rgb(182, 182, 182) 100%);
+  z-index: 1000;
+  color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Vazirmatn-thin';
 }
 
 @media (max-width: 1024px) {
   .card {
-      width: 90%;
-      min-height: 430px;
-      padding: 15px;
-      margin-top: 30px;
-    }
+    width: 90%;
+    min-height: 430px;
+    padding: 15px;
+    margin-top: 30px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -150,35 +159,34 @@ html, body {
     min-height: 150px;
     font-size: 0.9rem;
   }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .dropdown-select {
     font-size: 0.9rem;
   }
   .send-btn {
     padding: 10px;
     font-size: 0.9rem;
-    width: 69.5%;
+    width: 100%;
+    text-align: center;
   }
   .AlertBox {
-    width: 80%;          /* عرض بیشتر روی گوشی */
-    top: 3%;            /* پایین‌تر بیاد */
+    width: 80%;
+    top: 3%;
     left: 50%;
-    transform: translate(-50%, 0); /* فقط وسط افقی باشه، عمودی نه */
-    font-size: 0.9rem;   /* متن کوچیک‌تر */
+    transform: translate(-50%, 0);
+    font-size: 0.9rem;
     padding: 15px;
     min-height: 80px;
-
-} }
-
-
-
-
+  }
+}
 {% endblock style %}
-{% block script %}
 
+{% block script %}
 function closeBox() {
   document.getElementById('AlertBox').style.display = 'none';
 }
-
-setTimeout(closeBox, 3000)
-
+setTimeout(closeBox, 3000);
 {% endblock script %}

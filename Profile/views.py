@@ -3,6 +3,8 @@ from django.views import View
 from django.contrib.auth import logout
 from .models import ProfileModel
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.db.utils import IntegrityError
 
 
 class Profile(View):
@@ -52,10 +54,14 @@ class ProfileEdit(View):
             else:
                 new_username = request.POST.get('username').strip()
                 if new_username:
-                    user = User.objects.get(id=request.user.id)
-                    user.username = request.POST.get('username')
-                    user.save()
-                    message['username'] = 'یوزرنیم با موفقیت تغییر کرد.'
+                    try:
+                        user = User.objects.get(id=request.user.id)
+                        user.username = request.POST.get('username')
+                        user.save()
+                        message['username'] = 'یوزرنیم با موفقیت تغییر کرد.'
+                    except IntegrityError as e:
+                        if e.args[0] == 1062:
+                            message['username'] = 'این یوزرنیم قبلا ایجاد شده!'
                 else:
                     message['username'] = 'یوزرنیم نمیتواند خالی باشد.'
                 
@@ -68,13 +74,17 @@ class ProfileEdit(View):
                     user.email = request.POST.get('email')
                     user.save()
                     message['email'] = 'ایمیل با موفقیت تغییر کرد.'
+                    profileVerificationStatus = ProfileModel.objects.get(account=request.user)
+                    profileVerificationStatus.verified_status = 'bi bi-x-circle'
+                    profileVerificationStatus.save()
                 else:
                     message['email'] = 'ایمیل نمیتواند خالی باشد'
                     
             profile = ProfileModel.objects.get(account=request.user)
-            message['profile'] = profile
-            
-            return render(request, 'profileEdit.html', {'message': message})
+            message['profile'] = {
+                'verified_status':profile.verified_status
+            }
+            return JsonResponse({'message': message})
                 
         else:
             return redirect('/signin')

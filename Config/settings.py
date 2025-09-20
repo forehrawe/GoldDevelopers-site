@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'ForgotPassword',
     'Posts',
     'Profile',
-    'Ticket'
+    'Ticket',
+    'Verify',
 ]
 
 MIDDLEWARE = [
