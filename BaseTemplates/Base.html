@@ -27,6 +27,29 @@
     {% block body %}{% endblock body %}
 </body>
 <style>
+    /* کل اسکرول بار */
+body::-webkit-scrollbar {
+  width: 10px;              /* عرض */
+}
+
+/* پس‌زمینه اسکرول‌بار */
+body::-webkit-scrollbar-track {
+  background: #1e1e1e;       /* رنگ ترک */
+  border-radius: 10px;
+}
+
+/* خود دستگیره (thumb) */
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6a5acd, #483d8b);
+  border-radius: 10px;
+  border: 2px solid #1e1e1e; /* مرز برای فضای بین */
+}
+
+/* وقتی موس روش میاد */
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7b68ee, #4b0082);
+}
+
     {% block style %}{% endblock style %}
 </style>
 <script>

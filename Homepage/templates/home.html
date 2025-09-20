@@ -35,6 +35,7 @@ body, html {
   height: 100%;
   user-select: none;  /* انتخاب متن غیر فعال */
   -webkit-user-drag: none;
+  min-height: calc(100vh - 100px);
 }
 
 @font-face {
@@ -43,6 +44,10 @@ body, html {
          url("{% static 'fonts/Vazirmatn-thin.ttf' %}") format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+#PostDiv > div:last-child {
+  margin-bottom: 80px
 }
 
 {% endblock style %}

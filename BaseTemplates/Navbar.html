@@ -1,99 +1,57 @@
 {% load static %}
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
 
-<nav class="bg-gray-800 relative border-b-[1px] border-b-[rgb(0,102,255)] select-none z-50">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-1">
-    <div class="relative flex h-16 items-center justify-between">
+<body>
 
-      <!-- Mobile menu button -->
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-          <span class="sr-only">Open main menu</span>
-          <!-- Icon open -->
-          <svg class="h-6 w-6" id="icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <!-- Icon close -->
-          <svg class="h-6 w-6 hidden" id="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Logo & Desktop menu -->
-      <div class="flex-1 flex items-center justify-center sm:justify-start">
-        <div class="flex-shrink-0">
-          <img id="SiteLogo" class="h-12 w-auto" src="{% static 'image/LogoIMG.png' %}" alt="Logo">
-        </div>
-        <div class="hidden sm:flex sm:ml-6 space-x-4">
-          <a id="LinksTop" href="/" class="text-white bg-gray-950/50 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-          <a id="LinksTop" href="/ticket" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Ticket</a>
-          <a id="LinksTop" href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-          <a id="LinksTop" href="#" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium">About</a>
-        </div>
-      </div>
-
-      <!-- Profile dropdown -->
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <div class="relative">
-          <button id="profile-button" class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="sr-only">Open user menu</span>
-            <img id="AvatarLogo" class="h-9 w-9 rounded-full" src="{% static 'image/Avatar.png' %}" alt="User">
-          </button>
-          <!-- Dropdown menu -->
-          <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-20">
-            <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your profile</a>
-            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Sign out</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Mobile menu -->
-  <div class="sm:hidden hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href="/" class="block text-white bg-gray-950/50 px-3 py-2 rounded-md text-base font-medium">Home</a>
-      <a href="/ticket" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Ticket</a>
-      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">Projects</a>
-      <a href="#" class="block text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium">About</a>
-    </div>
+<nav>
+  <div class="navbar">
+      <a href="{% url 'Homepage-Named' %}"><i class="bi bi-house" style="color: rgb(104, 67, 255)"></i></a>
+      <a href="{% url 'ticket' %}"><i class="bi bi-envelope"></i></a>
+      <a href=""><i class="bi bi-folder"></i></a>
+      <a href="{% url 'profile' %}"><i class="bi bi-person"></i></a>
+      <a href=""><i class="bi bi-x"></i></a>
   </div>
 </nav>
-
-<script>
-  // Mobile menu toggle
-  const btn = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-    iconOpen.classList.toggle('hidden');
-    iconClose.classList.toggle('hidden');
-  });
-
-  // Profile menu toggle
-  const profileBtn = document.getElementById('profile-button');
-  const profileMenu = document.getElementById('profile-menu');
-
-  profileBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // جلوگیری از بسته شدن همزمان
-    profileMenu.classList.toggle('hidden');
-  });
-
-  // کلیک بیرون برای بستن منو
-  document.addEventListener('click', () => {
-    if (!profileMenu.classList.contains('hidden')) {
-      profileMenu.classList.add('hidden');
-    }
-  });
+  
+</body>
 
 
-  document.querySelectorAll('#SiteLogo, #AvatarLogo, #LinksTop').forEach(link => {
-        link.addEventListener('dragstart', (event) => {
-            event.preventDefault();
-        });
-    });
-</script>
+<style>
+  .navbar {
+    display: flex;
+    justify-content: center; /* متن داخل div وسط بشه */
+    align-items: center;     /* متن از نظر عمودی توی همون 50px وسط بشه */
+
+    position: absolute;
+    width: clamp(200px, 70%, 800px);
+    height: 50px;
+    gap: 40px;
+
+    background: rgba(58, 58, 58, 0.2);
+    border-radius: 40px;
+    color: white;
+    border: 1px solid white;
+    font-size: 30px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.381);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+
+    top: 90%;
+    left: 50%;               /* نقطه شروعش رو وسط صفحه بذار */
+    transform: translateX(-50%); /* خودش رو نصف عرضش برگردون */
+}
+
+@media only screen and (max-width: 768px){
+  .navbar {
+    gap: 27px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+</style>
+</html>
