@@ -19,8 +19,8 @@
       </a>
 
         <div class="profile-header">
-            <h4 class="username">Username : </h4><input name="username" value="{{ user.username }}" type='text' class="username_input" id="username" required />
-            <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" required />
+            <h4 class="username">Username : </h4><input name="username" value="{{ user.username }}" type='text' class="username_input" id="username" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" required />
+            <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" required />
             <h6>Email Verification : </h6><i class="{{ profile.verified_status }}"></i>
             {% if profile.verified_status == 'bi bi-x-circle' %} <a href="#" style="background-color: green; text-align: center; width: 90px; border-radius: 10px">Verify Now!</a> {% endif %}
         </div>
@@ -323,10 +323,10 @@ a.setting {
 
 .profile-header {
   display: grid;
-  grid-template-columns: repeat(2,160px);
+  grid-template-columns: repeat(2,145px);
   align-items: left;
   margin: 20px;
-  row-gap: 20px;
+  row-gap: 30px;
 }
 
 .username {
