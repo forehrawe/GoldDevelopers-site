@@ -1,0 +1,121 @@
+{% extends "Base.html" %}
+{% block title %}Verify{% endblock title %}
+{% block head %}{% include "Navbar.html" %}{% endblock head %}
+{% block body %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="VerifyCard">
+        <button type="button" id="send-code" class="send-code" onclick="Verify(event)">Send Verification Code</button>
+
+        <input type="text" id="code-input" placeholder="Enter Code" required />
+        <button type="button" id="submit-code">Check</button>
+        <small class="change-email">Your Email Is Incorrect? <a href="/profile/profile-edit" style="color: rgb(5, 103, 163);">Change Email</a></small>
+    </div>
+</form>
+
+{% endblock body %}
+{% block style %}
+
+body, html {
+    background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
+    height: 100%;
+}
+
+.VerifyCard {
+    background-color: #121212ff;
+    width: clamp(300px, 40%, 600px);
+    height: 60%;
+    position: absolute;   /* یا fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 0 0 7px black;
+    border: 1px solid black;
+}
+
+#code-input {
+    outline: none;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    padding: 3px;
+    width: 195px;
+    height: 30px;
+}
+
+.send-code {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    color: white;
+    background-color: #0091ff71;
+    width: 195px;
+    height: 30px;
+    border-radius: 4px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#submit-code {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    background-color: #0091ff71;
+    width: 195px;
+    height: 30px;
+    border-radius: 4px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.change-email {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: verdana;
+    width: 100%;
+    text-align: center
+}
+
+{% endblock style %}
+{% block script %}
+
+function Verify(event) {
+    event.preventDefault()
+    var sendcodebtn = document.getElementById('send-code');
+    sendcodebtn.style.display = "none";
+    
+    var codeinput = document.getElementById('code-input');
+    codeinput.style.display = "block";
+
+    var subcode = document.getElementById('submit-code');
+    subcode.style.display = "block";
+
+
+    Swal.fire({
+        text: "کد تایید به ایمیل شما ارسال شد",
+        icon: "success",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+    });
+
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    fetch('/verifyaccount/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded', 'X-CSRFToken':csrftoken},
+        body: 'status=' + encodeURIComponent('sendcode')
+    })
+
+}
+
+{% endblock script %}

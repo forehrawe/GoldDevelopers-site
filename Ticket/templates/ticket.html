@@ -17,7 +17,10 @@
 
   <form method="POST">
     {% csrf_token %}
-    <textarea dir="rtl" class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..." required></textarea>
+    <div>
+      <textarea id="textarea" dir="rtl" class="textarea" name="content" placeholder="متن خود را اینجا وارد کنید..." maxlength="600" required></textarea>
+      <div id='ticket-content-counter-id' class="ticket-content-counter">600/600</div>
+    </div>
 
     <div class="form-actions">
       <select name="category" class="dropdown-select">
@@ -143,28 +146,26 @@ html, body {
   font-family: 'Vazirmatn-thin';
 }
 
+.ticket-content-counter {
+  position: absolute;
+  top: 77.6%;
+  left: 27px;
+  color: white;
+}
+
 
 
 @media (max-width: 767px) {
   .title {
     font-size: 1.2rem;
   }
-  .textarea {
-    min-height: 150px;
-    font-size: 0.9rem;
-    height: 250px
-  }
-  .form-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
+
   .dropdown-select {
     font-size: 0.9rem;
   }
   .send-btn {
     padding: 10px;
     font-size: 0.9rem;
-    width: 100%;
     text-align: center;
   }
   .AlertBox {
@@ -185,4 +186,17 @@ function closeBox() {
   document.getElementById('AlertBox').style.display = 'none';
 }
 setTimeout(closeBox, 3000);
+
+
+
+var counter = document.getElementById('ticket-content-counter-id');
+var textarea = document.getElementById('textarea');
+var maxlen = textarea.maxLength;
+
+textarea.addEventListener('input', () => {
+  var typed_len = textarea.value.length;
+  var remained_len = maxlen - typed_len;
+
+  counter.textContent = `${remained_len} / ${maxlen}`;
+})
 {% endblock script %}

@@ -24,5 +24,6 @@ urlpatterns = [
     path('post/', include('Posts.urls')),
     path('signup/', include('Signup.urls')),
     path('profile/', include('Profile.urls')),
-    path('ticket/', include('Ticket.urls'))
+    path('ticket/', include('Ticket.urls')),
+    path('verifyaccount/', include('Verify.urls')),
 ]
