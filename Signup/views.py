@@ -3,7 +3,7 @@ from django.views import View
 from .forms import CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import login
-from Profile.models import ProfileModel
+from profile.models import ProfileModel
 # Create your views here.
 class Signup(View):
     def get(self, request):

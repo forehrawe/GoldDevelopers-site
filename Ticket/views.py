@@ -3,7 +3,7 @@ from django.views import View
 from .models import Tickets
 from django.utils import timezone
 import telebot
-from Profile.models import ProfileModel
+from profile.models import ProfileModel
 
 class Ticket(View):
     def get(self, request):

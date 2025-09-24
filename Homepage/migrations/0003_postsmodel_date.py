@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Homepage', '0002_rename_posts_postsmodel'),
+        ('homepage', '0002_rename_posts_postsmodel'),
     ]
 
     operations = [

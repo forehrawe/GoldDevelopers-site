@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from Homepage.models import PostsModel
+from homepage.models import PostsModel
 
 # Create your views here.
 class Posts(View):

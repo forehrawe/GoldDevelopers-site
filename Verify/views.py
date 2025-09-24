@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
-from Profile.models import ProfileModel
+from profile.models import ProfileModel
 from django.core.mail import send_mail
 import random
 import hashlib
