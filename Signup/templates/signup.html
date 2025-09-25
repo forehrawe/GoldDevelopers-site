@@ -3,7 +3,7 @@
 
 {% block head %}{% include "Navbar.html" %}{% endblock head %}
 {% block body %}
-<div class="flex flex-col items-center px-4 py-6">
+<div id="card" class="flex flex-col items-center px-4 py-6">
   <div class="w-full max-w-sm">
     <img src="{% static 'image/LogoIMG.png' %}" alt="Your Company" class="mx-auto h-24 w-auto" />
     <h2 class="mt-4 text-center text-2xl font-bold text-white">Sign up for a new account</h2>
@@ -46,9 +46,11 @@
 body, html {
   background: linear-gradient(135deg, #1b1a1a 0%, #282828ff 100%);
   background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0;
-  min-height: 100vh;
+  overflow-y: auto;
+  height: 100%;
+  user-select: none;  /* انتخاب متن غیر فعال */
+  -webkit-user-drag: none;
+  min-height: calc(100vh - 100px);
 }
 
 /* سفارشی سازی input ها */
@@ -65,3 +67,10 @@ input:focus {
   outline: 2px solid #6366f1; /* focus:outline-indigo-500 */
 }
 {% endblock style %}
+{% block script %}
+document.querySelectorAll('#card').forEach(link => {
+        link.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
+    });
+{% endblock script %}

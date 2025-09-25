@@ -19,13 +19,16 @@
 
 
 <style>
-  .navbar {
+.navbar {
+    position: fixed;   /* بهتره fixed باشه تا همیشه روی صفحه بمونه */
+    bottom: 20px;      /* همیشه 20px از پایین فاصله داشته باشه */
+    left: 50%;
+    transform: translateX(-50%);
+    
     display: flex;
-    justify-content: center; /* متن داخل div وسط بشه */
-    align-items: center;     /* متن از نظر عمودی توی همون 50px وسط بشه */
-
-    position: absolute;
-    width: clamp(200px, 70%, 800px);
+    justify-content: center;
+    align-items: center;
+    width: clamp(230px, 83%, 800px);
     height: 50px;
     gap: 40px;
 
@@ -33,16 +36,13 @@
     border-radius: 40px;
     color: white;
     border: 1px solid white;
-    font-size: 30px;
+    font-size: 25px;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.381);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
-
-    top: 90%;
-    left: 50%;               /* نقطه شروعش رو وسط صفحه بذار */
-    transform: translateX(-50%); /* خودش رو نصف عرضش برگردون */
 }
+
 
 @media only screen and (max-width: 768px){
   .navbar {
@@ -53,4 +53,11 @@
 }
 
 </style>
+<script>
+  document.querySelectorAll('.navbar').forEach(link => {
+        link.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
+    });
+</script>
 </html>
