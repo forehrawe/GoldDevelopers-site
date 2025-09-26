@@ -13,6 +13,9 @@
     <form method="POST" class="space-y-4 w-full">
     {% csrf_token %}
 
+    {% if response_result %}
+            <p style="font-family: verdana; color: red;">{{ response_result }}</p>
+    {% endif %}
     {% for field in form %}
         <div>
           <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-100">
@@ -48,12 +51,11 @@ body, html {
   background-repeat: no-repeat;
   overflow-y: auto;
   height: 100%;
-  user-select: none;  /* انتخاب متن غیر فعال */
+  user-select: none;
   -webkit-user-drag: none;
   min-height: calc(100vh - 100px);
 }
 
-/* سفارشی سازی input ها */
 input {
   display: block;
   width: 100%;

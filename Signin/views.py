@@ -6,7 +6,10 @@ from django.contrib.auth import get_user_model
 # Create your views here.
 class Signin(View):
     def get(self, request):
-        return render(request, 'signin.html')
+        if request.user.is_authenticated:
+            return redirect('/profile')
+        else:
+            return render(request, 'signin.html')
     
     def post(self, request):
         User = get_user_model()
@@ -19,5 +22,4 @@ class Signin(View):
                 login(request, user)
             return redirect("/")
         except:
-            # messages.error(request, "Invalid Username Or Password")
             return render(request, "signin.html", {'response_result':'Invalid Username Or Password'})
