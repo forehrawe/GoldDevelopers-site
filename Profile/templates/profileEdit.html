@@ -21,8 +21,12 @@
         <div class="profile-header">
             <h4 class="username">Username : </h4><input name="username" value="{{ user.username }}" type='text' class="username_input" id="username" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" required />
             <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" required />
-            <h6>Email Verification : </h6><i class="{{ profile.verified_status }}"></i>
-            {% if profile.verified_status == 'bi bi-x-circle' %} <a href="#" style="background-color: green; text-align: center; width: 90px; border-radius: 10px">Verify Now!</a> {% endif %}
+        </div>
+
+        <div class="verification-status">
+          <h6>Email Verification : </h6><i class="{{ profile.verified_status }}"></i>
+          {% if profile.verified_status == 'bi bi-x-circle' %} <a href="#" style="background-color: green; text-align: center; width: 90px; border-radius: 10px">Verify Now!</a> {% endif %}
+        
         </div>
 
         
@@ -339,6 +343,41 @@ a.setting {
   font-size: 24px;
   font-weight: bold;
   height: 30px;
+}
+.verification-status {
+  display: grid;
+  grid-auto-flow: column;
+}
+.verification-status i {
+  transform: translateY(14%);
+}
+
+@media only screen and (max-width: 768px){
+  .username, .email {
+    font-size: 16px;
+  }
+  .profile-header {
+    row-gap: 10px;
+    grid-template-columns: repeat(2,100px);
+  }
+  .username_input, .email_input {
+    font-size: 16px;
+    width: 175px;
+    font-size: 11px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .profile-card {
+    padding: 10px
+  }
+  .container .btn button {
+    position: absolute;
+    border-radius: 13px;
+    width: 90%;
+    height: 86%;
+    left: 50%;
+    transform: translateX(-50%)
+  }
 }
 
 {% endblock style %}

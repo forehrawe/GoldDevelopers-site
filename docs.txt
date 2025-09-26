@@ -1,20 +1,22 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-# Create your views here.
-# def AdminHomepage(request):
-#     return render(request, 'Admin/AdminManagements.html')
 
-class AdminHomepage(TemplateView):
-    template_name = 'Admin/AdminManagements.html'
+#SIMPLE APP:
+    from django.shortcuts import render
+    from django.views.generic import TemplateView
+    # Create your views here.
+    # def AdminHomepage(request):
+    #     return render(request, 'Admin/AdminManagements.html')
 
-#other way with using Methods:
-    #from django.views import View
-    # class AdminHomepage(View):
-    #     def get(self, request):
-    #         return render(request, '')
+    class AdminHomepage(TemplateView):
+        template_name = 'Admin/AdminManagements.html'
+
+    #OTHER WAY WITH USING HTTP METHODS:
+    	from django.views import View
+    	 class AdminHomepage(View):
+    	     def get(self, request):
+    	         return render(request, '')
 
 
-#in view if you need database records: 
+#IN VIEW IF YOU NEED DATABASE RECORDS FOR SEND TO TEMPLATE: 
     from django.views.generic import ListView
     from .models import Posts
 
@@ -29,7 +31,7 @@ class AdminHomepage(TemplateView):
 
 
 
-#find database record by id: 
+#FIND DATABASE RECORD BY ID: 
     from Homepage.models import PostsModel
 
     # Create your views here.
@@ -41,7 +43,7 @@ class AdminHomepage(TemplateView):
 
 
 
-#for make custom creation form
+#MAKING CUSTOM CREATION FORM:
     from django.contrib.auth.forms import UserCreationForm
     from django.contrib.auth.models import User
     from django import forms
@@ -57,7 +59,7 @@ class AdminHomepage(TemplateView):
 
 
 
-#object count
+#COUNT OBJECTS:
     posts_count = PostsModel.objects.filter(Author=user).count()
 
 
@@ -65,7 +67,7 @@ class AdminHomepage(TemplateView):
 
 
 
-#sessions: 
+#MANAGE SESSIONS: 
     def set_session(request):
         request.session['favorite_color'] = 'blue'
         return HttpResponse("سشن ذخیره شد!")
@@ -85,7 +87,7 @@ class AdminHomepage(TemplateView):
 
 
 
-#Use Email:
+#USE EMAIL SENDING ON DJANGO:
     from django.core.mail import send_mail
 
     def my_view(request):
@@ -97,3 +99,20 @@ class AdminHomepage(TemplateView):
             fail_silently=False,
         )
         return HttpResponse("ایمیل ارسال شد ✅")
+
+
+
+#Off Subject:
+    DEPLOY PYTHON APP ON CPANEL:
+	1-Create Python App
+	2-Open Terminal
+	3-Paste App Address To Terminal (take this from setup python app)
+	4-Install Packages You Need
+	5-CD To Your Project Folder
+	6-Type "nohup python3 app.py" For Non Stop Running
+
+	OTHER COMMANDS:
+	    ps aux -> Show All Of Proccess's Running In Host
+	    kill <PID> -> Kill Proccess
+
+	    

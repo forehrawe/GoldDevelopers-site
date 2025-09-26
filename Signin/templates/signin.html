@@ -10,20 +10,18 @@
   </div>
 
   <div class="mt-6 w-full max-w-sm">
-    {% if messages %}
+    {% if response_result %}
       <div class="mb-2">
-        {% for message in messages %}
-          <p class="text-red-500 text-sm">{{ message }}</p>
-        {% endfor %}
+          <p class="text-red-500 text-sm">{{ response_result }}</p>
       </div>
     {% endif %}
 
     <form action="{% url 'signin' %}" method="POST" class="space-y-4 w-full">
       {% csrf_token %}
       <div>
-        <label for="username" class="block text-sm font-medium text-gray-100">username</label>
+        <label for="email" class="block text-sm font-medium text-gray-100">Email</label>
         <div class="mt-1">
-          <input id="username" type="username" name="username" required autocomplete="username" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-none placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm" />
+          <input id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-none placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm" />
         </div>
       </div>
 
