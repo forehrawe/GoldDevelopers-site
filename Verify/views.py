@@ -5,6 +5,7 @@ from profile.models import ProfileModel
 from django.core.mail import send_mail
 import random
 import hashlib
+from profile.models import ProfileModel
 
 # Create your views here.
 class Verify(View):
@@ -20,6 +21,12 @@ class Verify(View):
     
     def get(self, request):
         if request.user.is_authenticated:
+            verified_obj = ProfileModel.objects.get(id=request.user.id)
+            
+            if verified_obj.verified_status == 'bi bi-check-circle':
+                print('verified')
+                
+
             return render(request, 'verify.html')
         
         else:

@@ -20,7 +20,7 @@
 
         <div class="profile-header">
             <h4 class="username">Username : </h4><input name="username" value="{{ user.username }}" type='text' class="username_input" id="username" oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" required />
-            <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" oninput="this.value=this.value.replace(/[^A-Za-z@_]/g,'')" required />
+            <h4 class="email">Email : </h4> <input name="email" value="{{ user.email }}" type='text' class="email_input" id="email" oninput="this.value=this.value.replace(/[^A-Za-z@_.]/g,'')" required />
         </div>
 
         <div class="verification-status">
