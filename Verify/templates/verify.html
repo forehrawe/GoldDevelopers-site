@@ -9,7 +9,7 @@
         <button type="button" id="send-code" class="send-code" onclick="Verify(event)">Send Verification Code</button>
 
         <input type="text" id="code-input" placeholder="Enter Code" required />
-        <button type="button" id="submit-code">Check</button>
+        <button type="button" id="submit-code" onclick="CheckCode(event)">Check</button>
         <small class="change-email">Your Email Is Incorrect? <a href="/profile/profile-edit" style="color: rgb(5, 103, 163);">Change Email</a></small>
     </div>
 </form>
@@ -117,5 +117,39 @@ function Verify(event) {
     })
 
 }
+
+function CheckCode(event) {
+    event.preventDefault()
+    var codeinput = document.getElementById('code-input').value;
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    fetch('/verifyaccount/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded', 'X-CSRFToken':csrftoken},
+        body: 'status=' + encodeURIComponent('verifycode') + '&code=' + encodeURIComponent(codeinput)
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === 'success') {
+            Swal.fire({
+                text: "حساب شما با موفقیت تایید شد",
+                icon: "success",
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = '/profile/';
+            });
+        } else {
+            Swal.fire({
+                text: "کد وارد شده اشتباه است",
+                icon: "error",
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        }
+    })
+}
+
 
 {% endblock script %}

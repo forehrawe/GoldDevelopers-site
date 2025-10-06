@@ -9,14 +9,16 @@ from profile.models import ProfileModel
 
 # Create your views here.
 class Verify(View):
-    def sned_code(self, request):
+    def send_code(self, request):
         chars = list('1234567890')
         code = ''.join(random.choices(chars, k=6))
         self.code_hex = hashlib.sha256(code.encode()).hexdigest()
+        request.session['code_hex'] = self.code_hex
         subject = "verification Code"
         message = code
         rec_list = [request.user.email]
         send_mail(subject=subject, message=message, from_email=None, recipient_list=rec_list)
+        del code
         
     
     def get(self, request):
@@ -24,7 +26,9 @@ class Verify(View):
             verified_obj = ProfileModel.objects.get(id=request.user.id)
             
             if verified_obj.verified_status == 'bi bi-check-circle':
-                print('verified')
+                return redirect('/profile')
+            
+            
                 
 
             return render(request, 'verify.html')
@@ -35,6 +39,19 @@ class Verify(View):
     def post(self, request):
         status = request.POST.get('status')
         if status == 'sendcode':
-            pass
+            self.send_code(request)
+            
+        if status == 'verifycode':
+            code = request.POST.get('code')
+            code_hex = hashlib.sha256(code.encode()).hexdigest()
+            
+            if code_hex == request.session.get('code_hex'):
+                verified_obj = ProfileModel.objects.get(id=request.user.id)
+                verified_obj.verified_status = 'bi bi-check-circle'
+                verified_obj.save()
+                return JsonResponse({'status': 'success'})
+            else:
+                return JsonResponse({'status': 'failed'})
             
             
+        return render(request, 'verify.html')

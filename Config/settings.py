@@ -113,12 +113,12 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'mail.yourdomain.com'   # یا مثلا smtp.yourdomain.com
-# EMAIL_PORT = 587                     # اگر SSL بود بذار 465
-# EMAIL_USE_TLS = False                 # برای 587 True
-# EMAIL_USE_SSL = True                # اگر 465 باشه اینو True کن
-# EMAIL_HOST_USER = 'noreply@yourdomain.com'
-# EMAIL_HOST_PASSWORD = 'mypassword'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.yourdomain.com'   # یا مثلا smtp.yourdomain.com
+EMAIL_PORT = 587                     # اگر SSL بود بذار 465
+EMAIL_USE_TLS = False                 # برای 587 True
+EMAIL_USE_SSL = True                # اگر 465 باشه اینو True کن
+EMAIL_HOST_USER = 'noreply@yourdomain.com'
+EMAIL_HOST_PASSWORD = 'mypassword'
 
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
