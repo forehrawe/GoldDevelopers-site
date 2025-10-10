@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-c&k8r+wt0+8-qd8*d(m(pven#2m#+f0abg_xok^@9@81id%fdb
 
 DEBUG = True
 
-ALLOWED_HOSTS = []#'127.0.0.1', 'localhost'
+ALLOWED_HOSTS = ['www.golddevelopers.ir', 'golddevelopers.ir']#'127.0.0.1', 'localhost'
 
 
 INSTALLED_APPS = [
@@ -73,6 +73,21 @@ DATABASES = {
     }
 }
 
+#-----------IN HOST-------------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',  # برای MySQL
+#         'NAME': 'cp63894136337_golddevelopers',              # اسم دیتابیس
+#         'USER': 'cp63894136337_golddevelopers',              # یوزر دیتابیس
+#         'PASSWORD': 'Hadi25889999',          # پسورد دیتابیس
+#         'HOST': 'localhost',                  # یا آی‌پی سرور
+#         'PORT': '3306',                       # پورت MySQL
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     }
+# }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -100,9 +115,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 #-----------IN HOST-------------------
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-# STATIC_ROOT = '/home/cp63894136337/public_html/static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = '/home/cp63894136337/public_html/static/'
 
 
 

@@ -13,4 +13,4 @@ urlpatterns = [
 ]
 
 
-#handler404 = 'error_handler.views.custom_404'
+handler404 = 'error_handler.views.custom_404'
